@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-service/order-platform.inventory-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-service/order-platform.inventory-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-service/order-platform.inventory-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-service/order-platform.inventory-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-service/order-platform.notification-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-service/order-platform.notification-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-service/order-platform.notification-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-service/order-platform.notification-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/order-service/order-platform.order-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/order-service/order-platform.order-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/order-service/order-platform.order-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/order-service/order-platform.order-service.test.iml" />
+    </modules>
+  </component>
+</project>

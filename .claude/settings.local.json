@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/mymus/projects/ApiGatewayProject -not -path */.git/* -not -path */.gradle/* -not -path */.idea/* -not -path */build/* -type f)",
+      "Bash(wc:*)",
+      "Bash(find /c/Users/mymus/projects/ApiGatewayProject -type d -not -path */.git/* -not -path */.gradle/* -not -path */.idea/* -not -path */build/*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

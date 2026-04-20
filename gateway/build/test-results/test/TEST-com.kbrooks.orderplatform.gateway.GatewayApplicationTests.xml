@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kbrooks.orderplatform.gateway.GatewayApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-20T19:25:58.389Z" hostname="KYLEPC" time="0.06">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.kbrooks.orderplatform.gateway.GatewayApplicationTests" time="0.048"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

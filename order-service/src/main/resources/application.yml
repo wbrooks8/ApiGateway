@@ -14,3 +14,21 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
+
+server:
+  port: 8081
+
+services:
+  inventory:
+    url: http://localhost:8082
+  notification:
+    url: http://localhost:8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

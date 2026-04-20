@@ -5,6 +5,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="order-platform.gateway" options="-parameters" />
+      <module name="order-platform.gateway.main" options="-parameters" />
+      <module name="order-platform.gateway.test" options="-parameters" />
       <module name="order-platform.inventory-service" options="-parameters" />
       <module name="order-platform.inventory-service.main" options="-parameters" />
       <module name="order-platform.inventory-service.test" options="-parameters" />

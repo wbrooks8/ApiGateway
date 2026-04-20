@@ -1,5 +1,5 @@
 services:
-  postgres:
+  orders-postgres:
     image: postgres:16
     environment:
       POSTGRES_DB: orders_db
@@ -8,7 +8,85 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - orders_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U order_user -d orders_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  inventory-postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: inventory_user
+      POSTGRES_PASSWORD: inventory_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - inventory_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U inventory_user -d inventory_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  order-service:
+    build:
+      context: .
+      dockerfile: order-service/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://orders-postgres:5432/orders_db
+      SPRING_DATASOURCE_USERNAME: order_user
+      SPRING_DATASOURCE_PASSWORD: order_password
+      SERVICES_INVENTORY_URL: http://inventory-service:8082
+      SERVICES_NOTIFICATION_URL: http://notification-service:8083
+    depends_on:
+      orders-postgres:
+        condition: service_healthy
+      inventory-service:
+        condition: service_started
+      notification-service:
+        condition: service_started
+
+  inventory-service:
+    build:
+      context: .
+      dockerfile: inventory-service/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://inventory-postgres:5432/inventory_db
+      SPRING_DATASOURCE_USERNAME: inventory_user
+      SPRING_DATASOURCE_PASSWORD: inventory_password
+    depends_on:
+      inventory-postgres:
+        condition: service_healthy
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: notification-service/Dockerfile
+    ports:
+      - "8083:8083"
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_CLOUD_GATEWAY_ROUTES_0_URI: http://order-service:8081
+      SPRING_CLOUD_GATEWAY_ROUTES_1_URI: http://inventory-service:8082
+      SPRING_CLOUD_GATEWAY_ROUTES_2_URI: http://notification-service:8083
+    depends_on:
+      - order-service
+      - inventory-service
+      - notification-service
 
 volumes:
-  postgres_data:
+  orders_postgres_data:
+  inventory_postgres_data:
